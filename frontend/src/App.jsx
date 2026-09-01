@@ -22,7 +22,7 @@ import AiCopilotDrawer from './components/modals/AiCopilotDrawer';
 import { CheckCircle2, AlertCircle } from 'lucide-react';
 
 function CrmContent() {
-  const { activeTab, notification, loading } = useCrm();
+  const { activeTab, notification } = useCrm();
 
   const renderActiveView = () => {
     switch (activeTab) {
@@ -60,13 +60,13 @@ function CrmContent() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col selection:bg-brand-500 selection:text-slate-950 font-sans">
+    <div className="min-h-screen bg-[#F4F9FD] text-slate-900 flex flex-col font-sans selection:bg-[#38b6ff] selection:text-white">
       <Navbar />
 
       <div className="flex-1 flex overflow-hidden">
         <Sidebar />
 
-        <main className="flex-1 overflow-y-auto p-4 lg:p-6 bg-slate-950">
+        <main className="flex-1 overflow-y-auto p-3.5 sm:p-5 lg:p-6 bg-[#F4F9FD]">
           <div className="max-w-7xl mx-auto">
             {renderActiveView()}
           </div>
@@ -84,14 +84,14 @@ function CrmContent() {
           <div
             className={`flex items-center gap-2.5 px-4 py-3 rounded-2xl shadow-2xl border text-xs font-bold ${
               notification.type === 'error'
-                ? 'bg-rose-950/90 text-rose-200 border-rose-500/50'
-                : 'bg-slate-900/90 text-brand-300 border-brand-400/50 shadow-glow'
+                ? 'bg-rose-50 text-rose-800 border-rose-200'
+                : 'bg-white text-brand-800 border-brand-300 shadow-glow'
             }`}
           >
             {notification.type === 'error' ? (
-              <AlertCircle className="w-4 h-4 text-rose-400" />
+              <AlertCircle className="w-4 h-4 text-rose-500" />
             ) : (
-              <CheckCircle2 className="w-4 h-4 text-brand-400" />
+              <CheckCircle2 className="w-4 h-4 text-brand-500" />
             )}
             <span>{notification.message}</span>
           </div>

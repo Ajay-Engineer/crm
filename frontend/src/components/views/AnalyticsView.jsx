@@ -2,12 +2,7 @@ import React from 'react';
 import { useCrm } from '../../context/CrmContext';
 import {
   BarChart3,
-  TrendingUp,
-  PieChart as PieIcon,
-  DollarSign,
-  Award,
-  Layers,
-  ArrowUpRight
+  PieChart as PieIcon
 } from 'lucide-react';
 import {
   BarChart,
@@ -18,22 +13,11 @@ import {
   ResponsiveContainer,
   PieChart,
   Pie,
-  Cell,
-  LineChart,
-  Line
+  Cell
 } from 'recharts';
 
 export default function AnalyticsView() {
-  const { kpis, deals } = useCrm();
-
-  const monthlyRevenue = kpis?.monthlyRevenue || [
-    { month: 'Apr', revenue: 42000, target: 40000 },
-    { month: 'May', revenue: 68000, target: 55000 },
-    { month: 'Jun', revenue: 95000, target: 80000 },
-    { month: 'Jul', revenue: 130000, target: 110000 },
-    { month: 'Aug', revenue: 175000, target: 150000 },
-    { month: 'Sep (Forecast)', revenue: 220000, target: 180000 },
-  ];
+  const { kpis } = useCrm();
 
   const stageDistribution = kpis?.stageDistribution || [
     { stage: 'New Inbound', count: 4, value: 35000 },
@@ -51,34 +35,34 @@ export default function AnalyticsView() {
   ];
 
   return (
-    <div className="space-y-6 pb-12">
+    <div className="space-y-5 pb-12">
       <div>
         <div className="flex items-center gap-2">
-          <h1 className="text-2xl font-extrabold text-white">Reporting & Revenue Analytics</h1>
-          <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-brand-500/20 text-brand-300 border border-brand-500/30">
+          <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900">Reporting & Revenue Analytics</h1>
+          <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-brand-50 text-brand-700 border border-brand-200">
             Real-time Telemetry
           </span>
         </div>
-        <p className="text-xs text-slate-400 mt-0.5">
-          Comprehensive business intelligence across pipeline conversion, win/loss rates & lead sources
+        <p className="text-xs text-slate-500 mt-0.5 font-medium">
+          Business intelligence across pipeline conversion, win/loss rates & lead sources
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
         {/* Pipeline Stage Distribution */}
-        <div className="glass-panel p-5 rounded-2xl space-y-4">
-          <h3 className="text-sm font-bold text-white flex items-center gap-2">
-            <BarChart3 className="w-4 h-4 text-brand-400" />
+        <div className="glass-panel p-5 rounded-2xl space-y-4 shadow-card">
+          <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+            <BarChart3 className="w-4 h-4 text-brand-600" />
             <span>Pipeline Value by Stage</span>
           </h3>
 
           <div className="h-64 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={stageDistribution} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
-                <XAxis dataKey="stage" stroke="#64748b" fontSize={10} tickLine={false} />
-                <YAxis stroke="#64748b" fontSize={10} tickLine={false} tickFormatter={(val) => `$${val / 1000}k`} />
+                <XAxis dataKey="stage" stroke="#94a3b8" fontSize={10} tickLine={false} />
+                <YAxis stroke="#94a3b8" fontSize={10} tickLine={false} tickFormatter={(val) => `$${val / 1000}k`} />
                 <Tooltip
-                  contentStyle={{ backgroundColor: '#0f172a', borderColor: '#38b6ff', borderRadius: '8px', fontSize: '12px' }}
+                  contentStyle={{ backgroundColor: '#ffffff', borderColor: '#38b6ff', borderRadius: '12px', fontSize: '12px', color: '#0f172a' }}
                   formatter={(val) => [`$${val.toLocaleString()}`, 'Pipeline Value']}
                 />
                 <Bar dataKey="value" fill="#38b6ff" radius={[6, 6, 0, 0]} />
@@ -88,9 +72,9 @@ export default function AnalyticsView() {
         </div>
 
         {/* Lead Source Breakdown Pie Chart */}
-        <div className="glass-panel p-5 rounded-2xl space-y-4">
-          <h3 className="text-sm font-bold text-white flex items-center gap-2">
-            <PieIcon className="w-4 h-4 text-emerald-400" />
+        <div className="glass-panel p-5 rounded-2xl space-y-4 shadow-card">
+          <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+            <PieIcon className="w-4 h-4 text-emerald-600" />
             <span>Lead Acquisition Attribution</span>
           </h3>
 
@@ -111,19 +95,19 @@ export default function AnalyticsView() {
                   ))}
                 </Pie>
                 <Tooltip
-                  contentStyle={{ backgroundColor: '#0f172a', borderColor: '#38b6ff', borderRadius: '8px', fontSize: '12px' }}
+                  contentStyle={{ backgroundColor: '#ffffff', borderColor: '#38b6ff', borderRadius: '12px', fontSize: '12px', color: '#0f172a' }}
                   formatter={(val, name, entry) => [`${val} Leads (${entry.payload.name})`, 'Count']}
                 />
               </PieChart>
             </ResponsiveContainer>
           </div>
 
-          <div className="grid grid-cols-2 gap-2 pt-2 border-t border-slate-800">
+          <div className="grid grid-cols-2 gap-2 pt-2 border-t border-slate-100">
             {leadSources.map((src) => (
               <div key={src.name} className="flex items-center gap-2 text-xs">
                 <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: src.color }}></span>
-                <span className="text-slate-300 truncate">{src.name}:</span>
-                <span className="font-bold text-white">{src.count}</span>
+                <span className="text-slate-600 truncate font-medium">{src.name}:</span>
+                <span className="font-extrabold text-slate-900">{src.count}</span>
               </div>
             ))}
           </div>

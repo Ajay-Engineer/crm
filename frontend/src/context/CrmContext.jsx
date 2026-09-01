@@ -27,6 +27,7 @@ export function CrmProvider({ children }) {
   const [selectedCustomSchemaId, setSelectedCustomSchemaId] = useState('schema_property');
 
   // Modals & Drawers
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isAiDrawerOpen, setIsAiDrawerOpen] = useState(false);
   const [isAddLeadModalOpen, setIsAddLeadModalOpen] = useState(false);
   const [isAddDealModalOpen, setIsAddDealModalOpen] = useState(false);
@@ -159,6 +160,8 @@ export function CrmProvider({ children }) {
         selectedContact360,
         selectedCustomSchemaId,
         setSelectedCustomSchemaId,
+        isMobileMenuOpen,
+        setIsMobileMenuOpen,
         isAiDrawerOpen,
         setIsAiDrawerOpen,
         isAddLeadModalOpen,

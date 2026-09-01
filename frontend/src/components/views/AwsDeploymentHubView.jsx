@@ -1,16 +1,12 @@
 import React, { useState } from 'react';
 import { useCrm } from '../../context/CrmContext';
 import {
-  Cloud,
   Database,
   CheckCircle2,
   Server,
   Zap,
   Copy,
-  Terminal,
-  ShieldCheck,
-  Globe,
-  ExternalLink
+  Globe
 } from 'lucide-react';
 import { api } from '../../services/api';
 
@@ -64,36 +60,36 @@ functions:
           method: ANY`;
 
   return (
-    <div className="space-y-6 pb-12">
+    <div className="space-y-5 pb-12">
       <div>
         <div className="flex items-center gap-2">
-          <h1 className="text-2xl font-extrabold text-white">AWS & Firebase Cloud Deployment Hub</h1>
-          <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+          <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900">AWS & Firebase Cloud Deployment Hub</h1>
+          <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
             Live Telemetry
           </span>
         </div>
-        <p className="text-xs text-slate-400 mt-0.5">
+        <p className="text-xs text-slate-500 mt-0.5 font-medium">
           Verify AWS DynamoDB backend, inspect Lambda Serverless templates & Firebase Hosting configuration
         </p>
       </div>
 
       {/* Live AWS Connection Telemetry Card */}
-      <div className="glass-panel p-6 rounded-2xl border border-brand-400/40 bg-gradient-to-r from-navy-900 via-slate-900 to-slate-950 space-y-4 shadow-glow">
+      <div className="glass-panel p-5 sm:p-6 rounded-2xl border border-brand-200 bg-white space-y-4 shadow-card">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3.5">
-            <div className="w-12 h-12 rounded-xl bg-slate-950 border border-brand-400 flex items-center justify-center text-brand-400 shadow-glow">
+            <div className="w-12 h-12 rounded-2xl bg-brand-50 border border-brand-300 flex items-center justify-center text-brand-600 shadow-xs">
               <Database className="w-6 h-6" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h2 className="text-base font-bold text-white">Amazon DynamoDB (Serverless)</h2>
-                <span className="flex items-center gap-1 text-[11px] font-bold text-emerald-400 bg-emerald-500/20 px-2 py-0.5 rounded-full border border-emerald-500/30">
+                <h2 className="text-base font-bold text-slate-900">Amazon DynamoDB (Serverless)</h2>
+                <span className="flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
                   <CheckCircle2 className="w-3.5 h-3.5" />
                   <span>{liveResult?.status || 'CONNECTED'}</span>
                 </span>
               </div>
-              <p className="text-xs text-slate-300 mt-0.5">
-                AWS Region: <strong className="text-brand-300 font-mono">ap-south-1 (Mumbai)</strong> • Table: <span className="font-mono">{liveResult?.tableName || 'HIG_CRM_MAIN'}</span>
+              <p className="text-xs text-slate-600 mt-0.5 font-medium">
+                AWS Region: <strong className="text-brand-700 font-mono">ap-south-1 (Mumbai)</strong> • Table: <span className="font-mono text-slate-700">{liveResult?.tableName || 'HIG_CRM_MAIN'}</span>
               </p>
             </div>
           </div>
@@ -101,92 +97,92 @@ functions:
           <button
             onClick={handleRunAwsCheck}
             disabled={testingAws}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-400 hover:to-brand-500 text-xs font-bold text-slate-950 shadow-glow disabled:opacity-50 transition-all"
+            className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-[#38b6ff] hover:bg-[#0284c7] text-xs font-bold text-white shadow-glow disabled:opacity-50 transition-all"
           >
             <Zap className="w-4 h-4 fill-current" />
             <span>{testingAws ? 'Testing AWS...' : 'Re-test AWS Latency'}</span>
           </button>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3 border-t border-slate-800 text-xs">
-          <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3 border-t border-slate-100 text-xs">
+          <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
             <span className="text-[10px] text-slate-400 font-bold uppercase">Table Status</span>
-            <div className="font-mono text-emerald-400 font-bold mt-0.5">{liveResult?.tableStatus || 'ACTIVE'}</div>
+            <div className="font-mono text-emerald-700 font-bold mt-0.5">{liveResult?.tableStatus || 'ACTIVE'}</div>
           </div>
-          <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800">
+          <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
             <span className="text-[10px] text-slate-400 font-bold uppercase">Billing Mode</span>
-            <div className="font-mono text-brand-300 font-bold mt-0.5">PAY_PER_REQUEST</div>
+            <div className="font-mono text-brand-700 font-bold mt-0.5">PAY_PER_REQUEST</div>
           </div>
-          <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800">
+          <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
             <span className="text-[10px] text-slate-400 font-bold uppercase">Multi-Tenancy</span>
-            <div className="font-mono text-purple-300 font-bold mt-0.5">Single-Table GSI1</div>
+            <div className="font-mono text-purple-700 font-bold mt-0.5">Single-Table GSI1</div>
           </div>
-          <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800">
+          <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
             <span className="text-[10px] text-slate-400 font-bold uppercase">Security</span>
-            <div className="font-mono text-emerald-400 font-bold mt-0.5">IAM Authenticated</div>
+            <div className="font-mono text-emerald-700 font-bold mt-0.5">IAM Authenticated</div>
           </div>
         </div>
       </div>
 
       {/* Deployment Instructions Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
         {/* Step 1: AWS Lambda Serverless Deploy */}
-        <div className="glass-panel p-5 rounded-2xl border border-slate-800 space-y-3">
+        <div className="glass-panel p-5 rounded-2xl space-y-3 shadow-card">
           <div className="flex items-center justify-between">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
-              <Server className="w-4 h-4 text-brand-400" />
+            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-800 flex items-center gap-2">
+              <Server className="w-4 h-4 text-brand-600" />
               <span>1. AWS Lambda API Serverless Config</span>
             </h3>
             <button
               onClick={() => copyToClipboard(serverlessYml, 'Serverless template')}
-              className="text-xs text-brand-400 hover:text-brand-300 flex items-center gap-1 font-semibold"
+              className="text-xs text-brand-600 hover:text-brand-700 flex items-center gap-1 font-bold"
             >
               <Copy className="w-3.5 h-3.5" />
               <span>Copy</span>
             </button>
           </div>
 
-          <p className="text-xs text-slate-400">
-            The backend includes <code className="text-brand-300 font-mono">lambda.js</code>. Deploy with 1 command:
+          <p className="text-xs text-slate-600 font-medium">
+            Deploy to AWS Lambda & API Gateway:
           </p>
 
-          <div className="bg-slate-950 p-3 rounded-xl border border-slate-800 font-mono text-[11px] text-emerald-400 space-y-1">
-            <div className="text-slate-500"># In /backend directory:</div>
+          <div className="bg-slate-50 p-3 rounded-xl border border-slate-200 font-mono text-[11px] text-brand-700 font-bold space-y-1">
+            <div className="text-slate-400"># In /backend directory:</div>
             <div>npx serverless deploy --region ap-south-1</div>
           </div>
 
-          <pre className="bg-slate-950 p-3 rounded-xl border border-slate-800 font-mono text-[11px] text-slate-300 overflow-x-auto">
+          <pre className="bg-slate-50 p-3 rounded-xl border border-slate-200 font-mono text-[11px] text-slate-700 overflow-x-auto">
             {serverlessYml}
           </pre>
         </div>
 
         {/* Step 2: Firebase Hosting Deploy */}
-        <div className="glass-panel p-5 rounded-2xl border border-slate-800 space-y-3">
+        <div className="glass-panel p-5 rounded-2xl space-y-3 shadow-card">
           <div className="flex items-center justify-between">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
-              <Globe className="w-4 h-4 text-amber-400" />
+            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-800 flex items-center gap-2">
+              <Globe className="w-4 h-4 text-amber-600" />
               <span>2. Firebase Hosting Deployment</span>
             </h3>
             <button
               onClick={() => copyToClipboard(firebaseJson, 'Firebase config')}
-              className="text-xs text-brand-400 hover:text-brand-300 flex items-center gap-1 font-semibold"
+              className="text-xs text-brand-600 hover:text-brand-700 flex items-center gap-1 font-bold"
             >
               <Copy className="w-3.5 h-3.5" />
               <span>Copy</span>
             </button>
           </div>
 
-          <p className="text-xs text-slate-400">
-            Deploy the React Vite SPA to Firebase Hosting with global CDN & SSL:
+          <p className="text-xs text-slate-600 font-medium">
+            Deploy the React Vite SPA to Firebase Hosting:
           </p>
 
-          <div className="bg-slate-950 p-3 rounded-xl border border-slate-800 font-mono text-[11px] text-emerald-400 space-y-1">
-            <div className="text-slate-500"># In /frontend directory:</div>
+          <div className="bg-slate-50 p-3 rounded-xl border border-slate-200 font-mono text-[11px] text-emerald-700 font-bold space-y-1">
+            <div className="text-slate-400"># In /frontend directory:</div>
             <div>npm run build</div>
             <div>firebase deploy --only hosting</div>
           </div>
 
-          <pre className="bg-slate-950 p-3 rounded-xl border border-slate-800 font-mono text-[11px] text-slate-300 overflow-x-auto">
+          <pre className="bg-slate-50 p-3 rounded-xl border border-slate-200 font-mono text-[11px] text-slate-700 overflow-x-auto">
             {firebaseJson}
           </pre>
         </div>
