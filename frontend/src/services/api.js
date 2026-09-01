@@ -234,7 +234,7 @@ const initialStore = {
       id: 'act_002',
       type: 'meeting',
       title: 'Executive AI Architecture Presentation',
-      content: 'Presented HIG AI Automation Serverless architecture on AWS Lambda + DynamoDB. Elena confirmed it exceeds their latency benchmarks.',
+      content: 'Presented HIG AI Automation architecture for enterprise multi-branch scaling. Elena confirmed it exceeds their performance benchmarks.',
       metadata: { channel: 'Zoom Video Call' },
       createdAt: new Date(Date.now() - 3600000 * 5).toISOString(),
     },
@@ -671,7 +671,7 @@ export const api = {
     if (live) return live;
 
     const lower = (query || '').toLowerCase();
-    let answer = `🤖 **HIG AI Business Analyst**:\n\nAnalyzing your entire **AWS DynamoDB** single-table CRM dataset:\n\n* **Active Pipeline**: **$415,000** across 4 opportunities.\n* **Closed Won Revenue**: **$175,000**.\n* **High-Intent Leads**: **3 leads ready for closing**.\n\n💡 **Recommendation**: Horizon Real Estate deal is ready for legal signing.`;
+    let answer = `🤖 **HIG AI Business Analyst**:\n\nAnalyzing your entire CRM pipeline and customer dataset:\n\n* **Active Pipeline**: **$415,000** across 4 opportunities.\n* **Closed Won Revenue**: **$175,000**.\n* **High-Intent Leads**: **3 leads ready for closing**.\n\n💡 **Recommendation**: Horizon Real Estate deal is ready for legal signing.`;
     
     if (lower.includes('lead') || lower.includes('hot')) {
       answer = `🎯 **HIG Lead Intelligence**:\n\n* **Top Lead**: **Liam O'Connor** (Celtic Luxury Hotels) — AI Score: **95/100**.\n* **Intent**: Urgent interest in custom Property/Reservation schema.\n* **Action**: WhatsApp welcome message has been dispatched.`;

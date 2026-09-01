@@ -25,7 +25,7 @@ export default function SettingsView() {
           logoUrl: '/logo.png',
         },
       });
-      showToast('Settings & Branding saved to AWS DynamoDB!', 'success');
+      showToast('Settings & Branding saved successfully!', 'success');
     } catch (err) {
       showToast(`Error: ${err.message}`, 'error');
     } finally {

@@ -20,7 +20,7 @@ export default function AiAnalystView() {
   const [messages, setMessages] = useState([
     {
       sender: 'ai',
-      text: `👋 **Welcome to HIG AI Business Analyst**!\n\nI have continuous semantic access to your entire **AWS DynamoDB** CRM dataset.\n\nAsk me anything about pipeline velocity, revenue forecasts, lead intent scores, or customer risk!`,
+      text: `👋 **Welcome to HIG AI Business Analyst**!\n\nI have continuous intelligent access to your CRM pipeline, leads, contacts, and customer interactions.\n\nAsk me anything about pipeline velocity, revenue forecasts, lead intent scores, or customer risk!`,
       timestamp: 'Just now',
     },
   ]);
@@ -58,7 +58,7 @@ export default function AiAnalystView() {
         <div className="flex items-center gap-2">
           <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900">HIG AI Business Analyst & Copilot</h1>
           <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-brand-50 text-brand-700 border border-brand-200">
-            DynamoDB RAG Engine
+            Intelligent Semantic Engine
           </span>
         </div>
         <p className="text-xs text-slate-500 mt-0.5 font-medium">
@@ -142,7 +142,7 @@ export default function AiAnalystView() {
           {isTyping && (
             <div className="flex items-center gap-2 text-xs text-brand-600 font-bold animate-pulse">
               <Sparkles className="w-4 h-4" />
-              <span>HIG AI analyzing DynamoDB tables...</span>
+              <span>HIG AI analyzing CRM data...</span>
             </div>
           )}
         </div>

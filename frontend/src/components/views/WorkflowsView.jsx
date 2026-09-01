@@ -136,7 +136,7 @@ export default function WorkflowsView() {
                 <div className="flex items-center justify-between text-xs font-bold text-brand-800">
                   <span className="flex items-center gap-1.5">
                     <Sparkles className="w-3.5 h-3.5 text-brand-600" />
-                    <span>Real-Time Execution Logs (DynamoDB & SQS Stream)</span>
+                    <span>Real-Time Execution Logs</span>
                   </span>
                   <span className="text-[10px] font-mono text-emerald-700 font-extrabold">STATUS: 200 OK</span>
                 </div>

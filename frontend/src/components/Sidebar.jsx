@@ -12,10 +12,11 @@ import {
   LifeBuoy,
   Bot,
   BarChart3,
-  Cloud,
+  Layers,
   Settings,
   Sparkles,
-  X
+  X,
+  Building
 } from 'lucide-react';
 
 export default function Sidebar() {
@@ -56,11 +57,11 @@ export default function Sidebar() {
       ],
     },
     {
-      title: 'ENTERPRISE & CLOUD',
+      title: 'ANALYTICS & MANAGEMENT',
       items: [
         { id: 'analytics', label: 'Analytics & Forecasts', icon: BarChart3 },
-        { id: 'aws_hub', label: 'Cloud & Integrations', icon: Cloud },
-        { id: 'settings', label: 'Settings & RBAC', icon: Settings },
+        { id: 'aws_hub', label: 'Integrations & Apps', icon: Layers },
+        { id: 'settings', label: 'Settings & Governance', icon: Settings },
       ],
     },
   ];
@@ -71,87 +72,86 @@ export default function Sidebar() {
   };
 
   const sidebarContent = (
-    <div className="flex-1 flex flex-col h-full bg-white border-r border-slate-200 overflow-y-auto">
-      {/* Mobile Drawer Header */}
-      <div className="lg:hidden p-4 border-b border-slate-100 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <img src="/logo.png" alt="HIG Logo" className="h-7 w-auto rounded border border-brand-300" />
-          <span className="font-extrabold text-sm text-slate-900">HIG CRM</span>
+    <div className="flex-1 flex flex-col h-full bg-white border-r border-slate-200 overflow-y-auto justify-between">
+      <div>
+        {/* Mobile Drawer Header */}
+        <div className="lg:hidden p-4 border-b border-slate-100 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <img src="/logo.png" alt="HIG Logo" className="h-7 w-auto rounded border border-brand-300" />
+            <span className="font-extrabold text-sm text-slate-900">HIG CRM</span>
+          </div>
+          <button
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="p-1.5 rounded-lg text-slate-500 hover:bg-slate-100"
+          >
+            <X className="w-5 h-5" />
+          </button>
         </div>
-        <button
-          onClick={() => setIsMobileMenuOpen(false)}
-          className="p-1.5 rounded-lg text-slate-500 hover:bg-slate-100"
-        >
-          <X className="w-5 h-5" />
-        </button>
-      </div>
 
-      {/* Navigation Groups */}
-      <div className="flex-1 py-4 px-3 space-y-5">
-        {navigationSections.map((section) => (
-          <div key={section.title} className="space-y-1">
-            <h3 className="px-3 text-[10px] font-bold uppercase tracking-wider text-slate-400">
-              {section.title}
-            </h3>
-            <div className="space-y-0.5">
-              {section.items.map((item) => {
-                const Icon = item.icon;
-                const isActive = activeTab === item.id;
-                return (
-                  <button
-                    key={item.id}
-                    onClick={() => handleSelectTab(item.id)}
-                    className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold transition-all group ${
-                      isActive
-                        ? 'bg-brand-50 text-brand-700 border border-brand-200 shadow-sm'
-                        : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
-                    }`}
-                  >
-                    <div className="flex items-center gap-2.5">
-                      <div
-                        className={`p-1 rounded-lg ${
-                          isActive
-                            ? 'text-brand-600 bg-white shadow-xs'
-                            : 'text-slate-400 group-hover:text-brand-500'
-                        } ${item.isAi ? 'text-brand-500 animate-pulse' : ''}`}
-                      >
-                        <Icon className="w-4 h-4" />
+        {/* Navigation Groups */}
+        <div className="py-4 px-3 space-y-5">
+          {navigationSections.map((section) => (
+            <div key={section.title} className="space-y-1">
+              <h3 className="px-3 text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                {section.title}
+              </h3>
+              <div className="space-y-0.5">
+                {section.items.map((item) => {
+                  const Icon = item.icon;
+                  const isActive = activeTab === item.id;
+                  return (
+                    <button
+                      key={item.id}
+                      onClick={() => handleSelectTab(item.id)}
+                      className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold transition-all group ${
+                        isActive
+                          ? 'bg-brand-50 text-brand-700 border border-brand-200 shadow-sm'
+                          : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2.5">
+                        <div
+                          className={`p-1 rounded-lg ${
+                            isActive
+                              ? 'text-brand-600 bg-white shadow-xs'
+                              : 'text-slate-400 group-hover:text-brand-500'
+                          } ${item.isAi ? 'text-brand-500 animate-pulse' : ''}`}
+                        >
+                          <Icon className="w-4 h-4" />
+                        </div>
+                        <span className="truncate">{item.label}</span>
                       </div>
-                      <span className="truncate">{item.label}</span>
-                    </div>
 
-                    {item.badge && (
-                      <span
-                        className={`text-[10px] font-bold px-1.5 py-0.5 rounded-md border ${item.badgeColor}`}
-                      >
-                        {item.badge}
-                      </span>
-                    )}
+                      {item.badge && (
+                        <span
+                          className={`text-[10px] font-bold px-1.5 py-0.5 rounded-md border ${item.badgeColor}`}
+                        >
+                          {item.badge}
+                        </span>
+                      )}
 
-                    {item.isAi && (
-                      <Sparkles className="w-3.5 h-3.5 text-brand-500" />
-                    )}
-                  </button>
-                );
-              })}
+                      {item.isAi && (
+                        <Sparkles className="w-3.5 h-3.5 text-brand-500" />
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
-      {/* Cloud & Platform Status Card */}
+      {/* Clean Workspace Footer */}
       <div className="p-3 border-t border-slate-100 bg-slate-50/70">
-        <div className="p-2.5 rounded-xl border border-brand-200 bg-white shadow-xs">
-          <div className="flex items-center justify-between text-xs mb-1">
-            <span className="font-bold text-slate-800">AWS Infrastructure</span>
-            <span className="text-[10px] font-bold text-emerald-600 font-mono">ACTIVE</span>
+        <div className="p-2.5 rounded-xl border border-slate-200 bg-white shadow-xs flex items-center gap-2.5">
+          <div className="w-8 h-8 rounded-xl bg-brand-50 border border-brand-200 flex items-center justify-center text-brand-600 shrink-0">
+            <Building className="w-4 h-4" />
           </div>
-          <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden mb-1.5">
-            <div className="bg-gradient-to-r from-brand-400 to-emerald-400 h-full w-full"></div>
+          <div className="min-w-0 flex-1">
+            <h4 className="text-xs font-bold text-slate-900 truncate">HIG Enterprise</h4>
+            <p className="text-[10px] text-slate-500 font-medium truncate">Universal Workspace</p>
           </div>
-          <p className="text-[10px] text-slate-500 font-medium">
-            DynamoDB Serverless (ap-south-1)
-          </p>
         </div>
       </div>
     </div>

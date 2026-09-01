@@ -1,52 +1,76 @@
 import React, { useState } from 'react';
 import { useCrm } from '../../context/CrmContext';
 import {
-  Cloud,
-  CheckCircle2,
-  Zap,
-  Globe,
   MessageSquare,
   Mail,
-  ShieldCheck,
   CreditCard,
-  Building,
-  Radio
+  Video,
+  CheckCircle2,
+  Share2,
+  Calendar,
+  Layers,
+  Sparkles,
+  ArrowUpRight
 } from 'lucide-react';
 
-const CONNECTORS = [
+const INTEGRATIONS = [
   {
-    id: 'conn_wa',
-    name: 'WhatsApp Business Cloud API',
-    desc: 'Automated 2-way client messaging, lead capture & templated broadcast follow-ups.',
+    id: 'int_wa',
+    name: 'WhatsApp Business API',
+    category: 'Messaging & Sales',
+    desc: 'Instant two-way chat, automated lead capture templates, and interactive quotation messaging.',
     status: 'ACTIVE',
     icon: MessageSquare,
     badge: 'Connected',
     badgeColor: 'bg-emerald-50 text-emerald-700 border-emerald-200',
   },
   {
-    id: 'conn_mail',
-    name: 'Omnichannel Email Gateway (Google & Outlook)',
-    desc: 'Synchronize inbound client inquiries, customer 360 email timeline & AI drafts.',
+    id: 'int_mail',
+    name: 'Omnichannel Email Sync (Google & Outlook)',
+    category: 'Communications',
+    desc: 'Bi-directional email logging, thread tracking, and AI-assisted reply drafting directly on Customer 360 dossiers.',
     status: 'ACTIVE',
     icon: Mail,
     badge: 'Connected',
     badgeColor: 'bg-emerald-50 text-emerald-700 border-emerald-200',
   },
   {
-    id: 'conn_aws',
-    name: 'Enterprise Cloud Vault (AWS DynamoDB)',
-    desc: 'Multi-tenant high-speed database with encrypted storage in region ap-south-1.',
+    id: 'int_stripe',
+    name: 'Payment & Invoice Gateway (Stripe / Razorpay)',
+    category: 'Billing & Invoicing',
+    desc: 'One-click invoice generation from Won Deals, payment link dispatches, and automatic revenue ledger sync.',
     status: 'ACTIVE',
-    icon: Cloud,
+    icon: CreditCard,
     badge: 'Connected',
     badgeColor: 'bg-emerald-50 text-emerald-700 border-emerald-200',
   },
   {
-    id: 'conn_pay',
-    name: 'Automated Payment & Invoice Gateway',
-    desc: 'Instant deal invoicing, payment link generation, and subscription billing.',
+    id: 'int_zoom',
+    name: 'Zoom & Google Meet Video Calls',
+    category: 'Meetings',
+    desc: 'One-click meeting scheduling from contact profiles and automatic AI meeting summary logs.',
+    status: 'ACTIVE',
+    icon: Video,
+    badge: 'Connected',
+    badgeColor: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+  },
+  {
+    id: 'int_cal',
+    name: 'Calendar & Appointment Booking',
+    category: 'Scheduling',
+    desc: 'Public booking links for client self-scheduling and automatic lead creation.',
     status: 'READY',
-    icon: CreditCard,
+    icon: Calendar,
+    badge: 'Ready to Connect',
+    badgeColor: 'bg-brand-50 text-brand-700 border-brand-200',
+  },
+  {
+    id: 'int_webhook',
+    name: 'Custom Webhooks & REST API',
+    category: 'Developer & Ops',
+    desc: 'Connect external web forms, e-commerce stores, and ERP systems with real-time JSON webhooks.',
+    status: 'READY',
+    icon: Share2,
     badge: 'Configured',
     badgeColor: 'bg-brand-50 text-brand-700 border-brand-200',
   },
@@ -54,116 +78,76 @@ const CONNECTORS = [
 
 export default function AwsDeploymentHubView() {
   const { showToast } = useCrm();
-  const [testing, setTesting] = useState(false);
-
-  const handleTestConnection = () => {
-    setTesting(true);
-    setTimeout(() => {
-      setTesting(false);
-      showToast('All enterprise cloud connections verified 100% operational!', 'success');
-    }, 600);
-  };
 
   return (
     <div className="space-y-5 pb-12">
-      <div>
-        <div className="flex items-center gap-2">
-          <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900">
-            Enterprise Cloud & Integration Hub
-          </h1>
-          <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
-            All Systems Operational
-          </span>
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <div>
+          <div className="flex items-center gap-2">
+            <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900">
+              Integrations & Connected Apps
+            </h1>
+            <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+              4 Active Connections
+            </span>
+          </div>
+          <p className="text-xs text-slate-500 mt-0.5 font-medium">
+            Connect your favorite messaging, billing, meeting, and marketing tools to automate business workflows
+          </p>
         </div>
-        <p className="text-xs text-slate-500 mt-0.5 font-medium">
-          Manage business connectors, cloud database status, messaging gateways and real-time syncing
-        </p>
+
+        <button
+          onClick={() => showToast('New app connector wizard opened!', 'success')}
+          className="w-full sm:w-auto flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-[#38b6ff] hover:bg-[#0284c7] text-xs font-bold text-white shadow-glow transition-all"
+        >
+          <Layers className="w-4 h-4" />
+          <span>Browse App Directory</span>
+        </button>
       </div>
 
-      {/* Cloud Health Overview Card */}
-      <div className="glass-panel p-5 sm:p-6 rounded-2xl border border-brand-200 bg-white space-y-4 shadow-card">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div className="flex items-center gap-3.5">
-            <div className="w-12 h-12 rounded-2xl bg-brand-50 border border-brand-200 flex items-center justify-center text-brand-600 shadow-xs">
-              <Cloud className="w-6 h-6" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <h2 className="text-base font-bold text-slate-900">
-                  HIG Cloud Operations Infrastructure
-                </h2>
-                <span className="flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
-                  <CheckCircle2 className="w-3.5 h-3.5" />
-                  <span>ONLINE</span>
-                </span>
-              </div>
-              <p className="text-xs text-slate-500 mt-0.5 font-medium">
-                Primary Database: <strong className="text-brand-700">AWS DynamoDB (ap-south-1)</strong> • Real-time Sync: <span className="font-bold text-emerald-600">Active</span>
-              </p>
-            </div>
-          </div>
-
-          <button
-            onClick={handleTestConnection}
-            disabled={testing}
-            className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-[#38b6ff] hover:bg-[#0284c7] text-xs font-bold text-white shadow-glow transition-all"
-          >
-            <Zap className="w-4 h-4 fill-current" />
-            <span>{testing ? 'Verifying Services...' : 'Verify Cloud Sync'}</span>
-          </button>
-        </div>
-
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3 border-t border-slate-100 text-xs">
-          <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
-            <span className="text-[10px] text-slate-400 font-bold uppercase">System Uptime</span>
-            <div className="font-mono text-emerald-700 font-bold mt-0.5">99.99%</div>
-          </div>
-          <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
-            <span className="text-[10px] text-slate-400 font-bold uppercase">Sync Latency</span>
-            <div className="font-mono text-brand-700 font-bold mt-0.5">14 ms</div>
-          </div>
-          <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
-            <span className="text-[10px] text-slate-400 font-bold uppercase">Data Privacy</span>
-            <div className="font-mono text-purple-700 font-bold mt-0.5">End-to-End Encrypted</div>
-          </div>
-          <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
-            <span className="text-[10px] text-slate-400 font-bold uppercase">Multi-Branch Sync</span>
-            <div className="font-mono text-emerald-700 font-bold mt-0.5">Automated</div>
-          </div>
-        </div>
-      </div>
-
-      {/* Enterprise Connectors List */}
+      {/* Integration Apps Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {CONNECTORS.map((conn) => {
-          const Icon = conn.icon;
+        {INTEGRATIONS.map((item) => {
+          const Icon = item.icon;
           return (
             <div
-              key={conn.id}
-              className="glass-panel p-5 rounded-2xl border border-slate-200 hover:border-brand-300 hover:shadow-card-hover transition-all space-y-3 shadow-card"
+              key={item.id}
+              className="glass-panel p-5 rounded-2xl border border-slate-200 hover:border-brand-300 hover:shadow-card-hover transition-all space-y-4 shadow-card group"
             >
               <div className="flex items-start justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-brand-50 border border-brand-200 flex items-center justify-center text-brand-600 shadow-xs">
+                  <div className="w-11 h-11 rounded-2xl bg-brand-50 border border-brand-200 flex items-center justify-center text-brand-600 shadow-xs group-hover:scale-105 transition-transform">
                     <Icon className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="text-sm font-bold text-slate-900">{conn.name}</h3>
-                    <p className="text-xs text-slate-500 font-medium line-clamp-1">{conn.desc}</p>
+                    <h3 className="text-sm font-bold text-slate-900">{item.name}</h3>
+                    <span className="text-[11px] font-semibold text-brand-600">
+                      {item.category}
+                    </span>
                   </div>
                 </div>
-                <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full border ${conn.badgeColor}`}>
-                  {conn.badge}
+
+                <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full border ${item.badgeColor}`}>
+                  {item.badge}
                 </span>
               </div>
 
-              <div className="flex items-center justify-between pt-2 border-t border-slate-100 text-xs">
-                <span className="text-slate-400 font-medium">Automatic Health Check</span>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                {item.desc}
+              </p>
+
+              <div className="flex items-center justify-between pt-3 border-t border-slate-100 text-xs">
+                <span className="text-slate-400 font-medium flex items-center gap-1">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+                  <span>Real-Time Sync</span>
+                </span>
+
                 <button
-                  onClick={() => showToast(`${conn.name} settings updated!`, 'success')}
-                  className="text-xs font-bold text-brand-600 hover:underline"
+                  onClick={() => showToast(`${item.name} settings opened`, 'success')}
+                  className="text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center gap-1 group-hover:underline"
                 >
-                  Configure Connector
+                  <span>Manage Settings</span>
+                  <ArrowUpRight className="w-3 h-3" />
                 </button>
               </div>
             </div>

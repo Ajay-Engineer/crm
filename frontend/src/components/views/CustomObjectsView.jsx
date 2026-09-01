@@ -141,7 +141,7 @@ export default function CustomObjectsView() {
               type="submit"
               className="px-4 py-2 rounded-xl bg-[#38b6ff] hover:bg-[#0284c7] text-xs font-bold text-white shadow-glow transition-all"
             >
-              Generate Schema in DynamoDB
+              Save Custom Object
             </button>
           </div>
         </form>
@@ -179,7 +179,7 @@ export default function CustomObjectsView() {
               <h2 className="text-base font-bold text-slate-900 flex items-center gap-2">
                 <span>{activeSchema.name} Records</span>
                 <span className="text-xs text-slate-500 font-semibold">
-                  ({records.length} records in AWS DynamoDB)
+                  ({records.length} records)
                 </span>
               </h2>
               <p className="text-xs text-slate-500 font-medium">
