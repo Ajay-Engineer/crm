@@ -59,7 +59,7 @@ export default function Sidebar() {
       title: 'ENTERPRISE & CLOUD',
       items: [
         { id: 'analytics', label: 'Analytics & Forecasts', icon: BarChart3 },
-        { id: 'aws_hub', label: 'AWS & Firebase Deploy', icon: Cloud },
+        { id: 'aws_hub', label: 'Cloud & Integrations', icon: Cloud },
         { id: 'settings', label: 'Settings & RBAC', icon: Settings },
       ],
     },
